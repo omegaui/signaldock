@@ -1,0 +1,25 @@
+.vscode/**
+.vscode-test/**
+out/**
+node_modules/**
+# node-notifier is external (esbuild can't bundle its vendor binaries),
+# so ship it + its runtime dep tree
+!node_modules/node-notifier/**
+!node_modules/growly/**
+!node_modules/is-wsl/**
+!node_modules/is-docker/**
+!node_modules/semver/**
+!node_modules/shellwords/**
+!node_modules/uuid/**
+!node_modules/which/**
+!node_modules/isexe/**
+src/**
+.gitignore
+.yarnrc
+esbuild.js
+vsc-extension-quickstart.md
+**/tsconfig.json
+**/eslint.config.mjs
+**/*.map
+**/*.ts
+**/.vscode-test.*

@@ -1,0 +1,109 @@
+{
+  "name": "signaldock",
+  "displayName": "SignalDock",
+  "publisher": "omegaui",
+  "description": "Real-time developer notifications beyond terminal exit codes",
+  "version": "0.0.2",
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/signaldock.js",
+  "contributes": {
+    "commands": [],
+    "configuration": {
+      "title": "SignalDock",
+      "properties": {
+        "signalDock.bridgePortType": {
+          "title": "Bridge Port Type",
+          "type": "string",
+          "enum": [
+            "Auto (Recommended)",
+            "System Specified",
+            "Custom"
+          ],
+          "scope": "resource",
+          "default": "Auto (Recommended)",
+          "description": "Port on which SignalDock transmits workflow events. Using Auto helps enable seemless SideKick connection without QR Scan.",
+          "ignoreSync": true
+        },
+        "signalDock.bridgePort": {
+          "title": "Bridge Port",
+          "type": "integer",
+          "scope": "resource",
+          "default": 0,
+          "description": "If you want to use a custom port, then select Custom in Bridge Port Type setting.",
+          "ignoreSync": true
+        },
+        "signalDock.bridgePassword": {
+          "title": "Bridge Password",
+          "type": "string",
+          "scope": "resource",
+          "default": "",
+          "description": "If you are on a public WiFi network, I recommened setting a password so that only your Sidekicks can connect to bridge but this disables automatic connection, you need to scan qr code once per Sidekick. Leave empty for private or home network.",
+          "ignoreSync": true
+        },
+        "signalDock.enableNotificationsOnHost": {
+          "title": "Enable host notifications",
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "Be notified on this device."
+        },
+        "signalDock.enableTerminalNotifier": {
+          "title": "Enable Terminal focussed notifications",
+          "type": "boolean",
+          "scope": "resource",
+          "default": true,
+          "description": "Be notified of when a long running command finishes."
+        },
+        "signalDock.terminalNotifierWaitTime": {
+          "title": "Terminal Notifier Wait Time",
+          "type": "integer",
+          "scope": "resource",
+          "default": 60,
+          "description": "Sends a notification to your desktop and SideKicks only when a terminal command takes more than speicified seconds of time to finish, default is 60 seconds."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/bonjour": "^3.5.13",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.125.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.27.3",
+    "eslint": "^9.39.3",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  },
+  "dependencies": {
+    "@types/node-notifier": "^8.0.5",
+    "@types/ws": "^8.18.1",
+    "bonjour": "^3.5.1",
+    "node-notifier": "^10.0.1",
+    "ws": "^8.21.0"
+  }
+}
