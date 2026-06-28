@@ -4,6 +4,8 @@
   "publisher": "omegaui",
   "description": "Real-time developer notifications beyond terminal exit codes",
   "version": "0.0.2",
+  "repository": "https://github.com/omegaui/signaldock",
+  "license": "Apache-2.0",
   "engines": {
     "vscode": "^1.125.0"
   },
